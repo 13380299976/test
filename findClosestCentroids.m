@@ -23,15 +23,15 @@ idx = zeros(size(X,1), 1);
 %第四个for计算Xi与第2~K个centroid的欧式距离temp，比上一个小便更新means和index
 for i = 1:size(X,1) %num of X
    means = 0;
-   for k = 1:size(X,2) %num of features of X
-        means = means + (X(i,k) - centroids(1,k))^2;%initial_centroids = [3 3; 6 2; 8 5]，求Xi到（3，3）的欧氏距离
-   end
+   dd = (X(i,:) - centroids(1,:));
+   means = dd*dd';%initial_centroids = [3 3; 6 2; 8 5]，求Xi到（3，3）的欧氏距离
+   
    id = 1;%初始化index 为 1
    for j = 2: K %注意是大写K，number of centroids = K，求到其他centroids的距离，更新index
        temp = 0;
-       for k = 1:size(X,2)
-            temp = temp + (X(i,k) - centroids(j,k))^2;
-       end
+       dd = (X(i,:) - centroids(j,:));
+       temp = dd*dd';
+       
        if temp <= means
            means = temp; 
            id = j; %因为for循环里比较欧氏距离+更新index，所以要先写一个初始的index

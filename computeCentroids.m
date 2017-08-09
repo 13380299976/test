@@ -27,13 +27,13 @@ centroids = zeros(K, n);
 %
 
 
-for i = 1:K
+for i = 1:K %最终要求哪个那个就在for循环最高层
     Ck = 0;
-    for j = 1:m
+    for j = 1:m%对属于i的本求平均
     	if idx(j) == i;
-        	Ck = Ck + 1;
+        	Ck = Ck + 1;%计算个数用于求平均
             for k = 1:n
-                centroids(i,k) = centroids(i,k) + X(j,k); 
+                centroids(i,:) = centroids(i,:) + X(j,:);%i类各个样本求和
             end 
         end
     end
